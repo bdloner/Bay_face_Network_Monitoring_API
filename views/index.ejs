@@ -17,12 +17,6 @@
 
 <style>
 
-  /*body{
-      overflow: hidden;
-  }*/
-
-  /*Page Loading*/
-
   .page    { display: none; padding: 0 0.5em; }
 
   * {
@@ -147,14 +141,6 @@
 
     <object id="bay-id" data="#" style="margin-right:3em; padding: 20px;width: 907px;height: 602px;"></object>
 
-    <br>
-    <div hidden>
-      <p> PID : <label id="pid"></label></p>
-      <p> Title : <label id="title"></label></p>
-      <p> Hostname : <label id="hostname"></label></p>
-      <p> Serial Number : <label id="sn"></label></p>
-      <p> IP Address : <label id="address"></label></p>
-    </div>
   </div>
 </div>
 
@@ -190,13 +176,17 @@
 
     function showDataBayface() {
 
-        var getData = getDataFromHref();
-        var hostname = getData.hostname;
-
         $.getJSON('/get-device', function (reply) {
 
             var title = reply.result[0].title;
-            var pid = reply.result[0].pid;
+            if(reply.result[0].pid === "WS-C4503-E" || reply.result[0].pid === "WS-C4506-E" ||
+                reply.result[0].pid === "WS-C4507R-E" || reply.result[0].pid === "WS-C4510R+E" ||
+                reply.result[0].pid === "WS-C4510R+E" || reply.result[0].pid === "ASR-9906"){
+                var pid = reply.result[0].pid;
+            }else{
+                var pid = "404-not-found";
+                document.getElementById("bay-id").style.width = "507px";
+            }
 
             if (title === "SwitchSystem"){
 
@@ -207,22 +197,44 @@
 
                 document.getElementById('bay-id').setAttribute('data', 'img/' + pid + '.svg');
 
-                for (var i = 0; i < reply.result[0].data.length; i++){
+                try{
 
-                    infoLinecardTitle.push(reply.result[0].data[i].title);
-                    infoLinecardPid.push(reply.result[0].data[i].pid);
+                  for (var i = 0; i < reply.result[0].data.length; i++){
 
-                    for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
+                      infoLinecardTitle.push(reply.result[0].data[i].title);
+                      infoLinecardPid.push(reply.result[0].data[i].pid);
 
-                        for (var k =0; k < reply.result[0].data[i].data[j].length; k++) {
+                      try {
 
-                            arraysInfoPort[count] = [reply.result[0].data[i].title,
-                                reply.result[0].data[i].data[j][k].ifname,
-                                reply.result[0].data[i].data[j][k].ifstate];
+                          for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
 
-                            count++;
-                        }
-                    }
+                              try {
+
+                                  for (var k = 0; k < reply.result[0].data[i].data[j].length; k++) {
+
+                                      if (reply.result[0].data[i].data[j][k].ifstate === "up" ||
+                                          reply.result[0].data[i].data[j][k].ifstate === "down" ||
+                                          reply.result[0].data[i].data[j][k].ifstate === "admin_down" ||
+                                          reply.result[0].data[i].data[j][k].ifstate === "no_module") {
+
+                                          arraysInfoPort[count] = [reply.result[0].data[i].title,
+                                              reply.result[0].data[i].data[j][k].ifname,
+                                              reply.result[0].data[i].data[j][k].ifstate];
+                                      } else {
+                                          alert("Wrong port status !!!");
+                                      }
+                                      count++;
+                                  }
+                              } catch (e) {
+                                  alert("JSON format not match !!!");
+                              }
+                          }
+                      } catch (e) {
+                          alert("JSON format not match !!!");
+                      }
+                  }
+                } catch (e) {
+                    alert("JSON format not match !!!");
                 }
 
                 localStorage.setItem("linetitle", infoLinecardTitle);
@@ -241,82 +253,119 @@
 
                 document.getElementById('bay-id').setAttribute('data', 'img/' + pid + '.svg');
 
-                for (var i = 0; i < reply.result[0].data.length; i++) {
+                try {
 
-                    infoLinecardTitle.push(reply.result[0].data[i].title);
-                    infoLinecardPid.push(reply.result[0].data[i].pid);
+                    for (var i = 0; i < reply.result[0].data.length; i++) {
 
-                    if((reply.result[0].data[i].title).includes("RSP") === true){
+                        infoLinecardTitle.push(reply.result[0].data[i].title);
+                        infoLinecardPid.push(reply.result[0].data[i].pid);
 
-                        for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
+                        if ((reply.result[0].data[i].title).includes("RSP") === true) {
 
-                            for (var k = 0; k < reply.result[0].data[i].data[j].length; k++) {
+                            try {
 
-                                arraysInfoPort[count] = [reply.result[0].data[i].title,
-                                    reply.result[0].data[i].data[j][k].ifname,
-                                    reply.result[0].data[i].data[j][k].ifstate];
+                                for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
 
-                                count++;
+                                    try {
+
+                                        for (var k = 0; k < reply.result[0].data[i].data[j].length; k++) {
+
+                                            if (reply.result[0].data[i].data[j][k].ifstate === "up" ||
+                                                reply.result[0].data[i].data[j][k].ifstate === "down" ||
+                                                reply.result[0].data[i].data[j][k].ifstate === "admin_down" ||
+                                                reply.result[0].data[i].data[j][k].ifstate === "no_module") {
+
+                                                arraysInfoPort[count] = [reply.result[0].data[i].title,
+                                                    reply.result[0].data[i].data[j][k].ifname,
+                                                    reply.result[0].data[i].data[j][k].ifstate];
+
+                                            } else {
+                                                alert("Wrong port status !!!");
+                                            }
+
+                                            count++;
+                                        }
+                                    } catch (e) {
+                                        alert("JSON format not match !!!");
+                                    }
+                                }
+                            } catch (e) {
+                                alert("JSON format not match !!!");
                             }
+
+                            localStorage.setItem("linetitle", infoLinecardTitle);
+                            localStorage.setItem("linepid", infoLinecardPid);
+
+                            localStorage.setItem("arraysInfoPort", JSON.stringify(arraysInfoPort));
+
+                        } else {
+
+                            try {
+
+                                for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
+
+                                    infoLinecardTitleMOD.push(reply.result[0].data[i].data[j].title);
+                                    infoLinecardPidMOD.push(reply.result[0].data[i].data[j].pid);
+
+                                    try {
+
+                                        for (var k = 0; k < reply.result[0].data[i].data[j].data.length; k++) {
+
+                                            try {
+
+                                                for (var l = 0; l < reply.result[0].data[i].data[j].data[k].length; l++) {
+
+                                                    if (reply.result[0].data[i].data[j].data[k][l].ifstate === "up" ||
+                                                        reply.result[0].data[i].data[j].data[k][l].ifstate === "down" ||
+                                                        reply.result[0].data[i].data[j].data[k][l].ifstate === "admin_down" ||
+                                                        reply.result[0].data[i].data[j].data[k][l].ifstate === "no_module") {
+
+                                                        arraysInfoPort[count] = [reply.result[0].data[i].data[j].title,
+                                                            reply.result[0].data[i].data[j].data[k][l].ifname,
+                                                            reply.result[0].data[i].data[j].data[k][l].ifstate];
+
+
+                                                    } else {
+                                                        alert("Wrong port status !!!");
+                                                    }
+
+                                                    count++;
+                                                }
+                                            } catch (e) {
+                                                alert("JSON format not match !!!");
+                                            }
+                                        }
+                                    } catch (e) {
+                                        alert("JSON format not match !!!");
+                                    }
+                                }
+                            } catch (e) {
+                                alert("JSON format not match !!!");
+                            }
+
+                            localStorage.setItem("linetitleMOD", infoLinecardTitleMOD);
+                            localStorage.setItem("linepidMOD", infoLinecardPidMOD);
+
+                            localStorage.setItem("arraysInfoPort", JSON.stringify(arraysInfoPort));
                         }
 
                         localStorage.setItem("linetitle", infoLinecardTitle);
                         localStorage.setItem("linepid", infoLinecardPid);
 
-                        localStorage.setItem("arraysInfoPort", JSON.stringify(arraysInfoPort));
-
-                    } else {
-
-                        for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
-
-                            infoLinecardTitleMOD.push(reply.result[0].data[i].data[j].title);
-                            infoLinecardPidMOD.push(reply.result[0].data[i].data[j].pid);
-
-                            for (var k = 0; k < reply.result[0].data[i].data[j].data.length; k++) {
-
-                                for (var l = 0; l < reply.result[0].data[i].data[j].data[k].length; l++) {
-
-                                    arraysInfoPort[count] = [reply.result[0].data[i].data[j].title,
-                                        reply.result[0].data[i].data[j].data[k][l].ifname,
-                                        reply.result[0].data[i].data[j].data[k][l].ifstate];
-
-                                    count++;
-                                }
-                            }
-                        }
-
-                        localStorage.setItem("linetitleMOD", infoLinecardTitleMOD);
-                        localStorage.setItem("linepidMOD", infoLinecardPidMOD);
-
-                        localStorage.setItem("arraysInfoPort", JSON.stringify(arraysInfoPort));
                     }
-
-                    localStorage.setItem("linetitle", infoLinecardTitle);
-                    localStorage.setItem("linepid", infoLinecardPid);
-
+                } catch (e) {
+                    alert("JSON format not match !!!");
                 }
+
+            } else{
+
+                document.getElementById('bay-id').setAttribute('data', 'img/404-not-found.svg');
+                document.getElementById("bay-id").style.width = "507px";
 
             }
 
         });
-
-
     }
-
-    function getDataFromHref() {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var hostname = url.searchParams.get("hostname");
-        var address = url.searchParams.get("address");
-        var community = url.searchParams.get("community");
-
-        return {
-            hostname: hostname,
-            address: address,
-            community: community
-        };
-    }
-
 </script>
 
 </body>

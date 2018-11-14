@@ -15,4 +15,8 @@ router.get('/get-device', function(req, res) {
 router.get('/show-bay-face', function(req, res){
     res.render('index');
 });
+
+router.get('/show-bay-face', function(req, res){
+    res.render('index');
+});
 module.exports = router;
