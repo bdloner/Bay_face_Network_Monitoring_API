@@ -5,7 +5,7 @@ var reply;
 
 router.post('/device', function(req, res){
     reply = req.body;
-    res.send(reply);
+    res.send("Post Success !!!");
 });
 
 router.get('/get-device', function(req, res) {
@@ -16,7 +16,7 @@ router.get('/show-bay-face', function(req, res){
     res.render('index');
 });
 
-router.get('/show-bay-face', function(req, res){
-    res.render('index');
+router.get('/', function(req, res){
+    res.render('welcome');
 });
 module.exports = router;

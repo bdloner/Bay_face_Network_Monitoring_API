@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="./css/style.css">
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
       integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 
 <head>
   <meta charset="utf-8">
@@ -202,7 +201,16 @@
                   for (var i = 0; i < reply.result[0].data.length; i++){
 
                       infoLinecardTitle.push(reply.result[0].data[i].title);
-                      infoLinecardPid.push(reply.result[0].data[i].pid);
+
+                      if(reply.result[0].data[i].pid === "WS-X45-SUP6L-E" || reply.result[0].data[i].pid === "WS-X45-SUP7-E" ||
+                          reply.result[0].data[i].pid === "WS-X45-SUP7L-E" || reply.result[0].data[i].pid === "WS-X45-SUP8-E" ||
+                          reply.result[0].data[i].pid === "WS-X45-SUP8L-E" || reply.result[0].data[i].pid === "WS-X4448-GB-SFP" ||
+                          reply.result[0].data[i].pid === "WS-X4612-SFP-E" || reply.result[0].data[i].pid === "WS-X4724-SFP-E" ||
+                          reply.result[0].data[i].pid === "WS-X4748-SFP-E"){
+                          infoLinecardPid.push(reply.result[0].data[i].pid);
+                      } else {
+                          alert("JSON format not match !!!");
+                      }
 
                       try {
 
@@ -258,7 +266,12 @@
                     for (var i = 0; i < reply.result[0].data.length; i++) {
 
                         infoLinecardTitle.push(reply.result[0].data[i].title);
-                        infoLinecardPid.push(reply.result[0].data[i].pid);
+                        if(reply.result[0].data[i].pid === "A9K-RSP440-SE" || reply.result[0].data[i].pid === "A9K-RSP880-SE" ||
+                            reply.result[0].data[i].pid === "A9K-MOD80-SE" || reply.result[0].data[i].pid === "A9K-MOD160-SE"){
+                            infoLinecardPid.push(reply.result[0].data[i].pid);
+                        } else {
+                            alert("JSON format not match !!!");
+                        }
 
                         if ((reply.result[0].data[i].title).includes("RSP") === true) {
 
@@ -305,7 +318,19 @@
                                 for (var j = 0; j < reply.result[0].data[i].data.length; j++) {
 
                                     infoLinecardTitleMOD.push(reply.result[0].data[i].data[j].title);
-                                    infoLinecardPidMOD.push(reply.result[0].data[i].data[j].pid);
+                                    if(reply.result[0].data[i].data[j].pid === "A9K-MPA-1x40GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-1X100GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-2X10GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-2x40GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-2X100GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-4X10GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-8x10GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-20X1GE" ||
+                                        reply.result[0].data[i].data[j].pid === "A9K-MPA-20X10GE"){
+                                        infoLinecardPidMOD.push(reply.result[0].data[i].data[j].pid);
+                                    } else {
+                                        alert("JSON format not match !!!");
+                                    }
 
                                     try {
 
