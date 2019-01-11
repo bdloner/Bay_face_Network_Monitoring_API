@@ -21,8 +21,8 @@ window.addEventListener("load", function() {
 		pt.x = evt.clientX;
 		pt.y = evt.clientY;
 		pt = pt.matrixTransform(svg.getScreenCTM().inverse());
-		var r_pt_x = pt.x + 30;
-		var r_pt_y = pt.y + 280;
+		var r_pt_x = pt.x + 20;
+		var r_pt_y = pt.y + 90;
 		tooltip.setAttributeNS(null, "transform", "translate(" + r_pt_x + " " + r_pt_y + ")");
 		tooltip.setAttributeNS(null, "visibility", "visible");
 
@@ -55,16 +55,16 @@ window.addEventListener("load", function() {
 							if(countLine%11 != 0){
 								if(getLocal[i][2] === "up"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "green";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "down") {
 									var path1 = document.getElementById("p" + numPort).style.fill = "red";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "admin_down"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "grey";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else {
 									var path1 = document.getElementById("p" + numPort).style.fill = "black";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								}
 								countLine++;
 								numPort+=2;
@@ -73,16 +73,16 @@ window.addEventListener("load", function() {
 								numPort=2;
 								if(getLocal[i][2] === "up"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "green";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "down") {
 									var path1 = document.getElementById("p" + numPort).style.fill = "red";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "admin_down"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "grey";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else {
 									var path1 = document.getElementById("p" + numPort).style.fill = "black";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								}
 								numPort+=2;
 							}

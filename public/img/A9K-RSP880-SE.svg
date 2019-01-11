@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		pt.x = evt.clientX;
 		pt.y = evt.clientY;
 		pt = pt.matrixTransform(svg.getScreenCTM().inverse());
-		var r_pt_x = pt.x ;
-		var r_pt_y = pt.y + 280;
+		var r_pt_x = pt.x - 10;
+		var r_pt_y = pt.y - 22;
 		tooltip.setAttributeNS(null, "transform", "translate(" + r_pt_x + " " + r_pt_y + ")");
 		tooltip.setAttributeNS(null, "visibility", "visible");
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             if(count%5 != 0){
                                 if(getLocal[i][2] === "up"){
                                     var path = document.getElementById("p" + count).style.fill = "green";
-                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
                                     /*var url = '../description-status.html?desc=' + getLocal[i][1] + "&status=" + getLocal[i][2];
                                 	 var path = document.getElementById("p" + count).setAttribute('onclick', "window.open(url, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')");//
                                 	 document.getElementById("p" + count).addEventListener("click", function(){
@@ -60,13 +60,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 									 });*/
                                 } else if(getLocal[i][2] === "down"){
                                     var path = document.getElementById("p" + count).style.fill = "red";
-                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
                                 } else if(getLocal[i][2] === "admin_down"){
                                     var path = document.getElementById("p" + count).style.fill = "grey";
-                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
                                 } else {
                                     var path = document.getElementById("p" + count).style.fill = "black";
-                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+                                    var path1 = document.getElementById("p" + count).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
                                 }
                                 count++;
                             }
@@ -77,13 +77,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 ]]></script>
-
-	<script type="text/ecmascript"><![CDATA[
-		function myFunction() {
-			alert("hello");
-		}
-	]]>
-</script>
 
 	<style>
 			#tooltip {

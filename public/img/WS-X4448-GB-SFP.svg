@@ -25,8 +25,8 @@ window.addEventListener("load", function() {
 		pt.x = evt.clientX;
 		pt.y = evt.clientY;
 		pt = pt.matrixTransform(svg.getScreenCTM().inverse());
-		var r_pt_x = pt.x - 60;
-		var r_pt_y = pt.y - 20;
+		var r_pt_x = pt.x - 30;
+		var r_pt_y = pt.y - 22;
 		tooltip.setAttributeNS(null, "transform", "translate(" + r_pt_x + " " + r_pt_y + ")");
 		tooltip.setAttributeNS(null, "visibility", "visible");
 
@@ -57,16 +57,16 @@ window.addEventListener("load", function() {
 							if(countLine%25 != 0){
 								if(getLocal[i][2] === "up"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "green";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "down") {
 									var path1 = document.getElementById("p" + numPort).style.fill = "red";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "admin_down"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "grey";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else {
 									var path1 = document.getElementById("p" + numPort).style.fill = "black";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								}
 								countLine++;
 								numPort+=2;
@@ -75,16 +75,16 @@ window.addEventListener("load", function() {
 								numPort=2;
 								if(getLocal[i][2] === "up"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "green";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "down") {
 									var path1 = document.getElementById("p" + numPort).style.fill = "red";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else if(getLocal[i][2] === "admin_down"){
 									var path1 = document.getElementById("p" + numPort).style.fill = "grey";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								} else {
 									var path1 = document.getElementById("p" + numPort).style.fill = "black";
-									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | status:" + getLocal[i][2]);
+									var path1 = document.getElementById("p" + numPort).setAttribute('data-tooltip-text', getLocal[i][1] + " | " + getLocal[i][2]);
 								}
 								numPort+=2;
 							}
@@ -16863,7 +16863,7 @@ RhFgoJGuf44FNSIrKswoYxlzFK/sbFf88Goc6JkxCjZC9zerpkaY0cq1xul6glGB8Yt1H/o6wnaH
 </g>
 <text transform="matrix(1 0 0 1 5.5202 7.7999)" class="st1129 st1130 st1131">WS-X4448-GB-SFP</text>
 
-	<g id="tooltip" visibility="hidden" >
+	<g id="tooltip" visibility="hidden">
         <rect x="2" y="2" width="80" height="18" fill="black" opacity="0.4" rx="2" ry="2"/>
         <rect width="80" height="18" fill="#fff" rx="2" ry="2"/>
         <text style="color:red" x="4" y="6">GigabitEthernet2/1</text>
